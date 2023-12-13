@@ -162,7 +162,6 @@ bool list_remove(List *list, int index)
 
     if (list_is_empty(list))
     {
-        fprintf(stderr, ">>ERROR: Cannot remove element from an empty list\n");
         return false;
     }
 
@@ -185,7 +184,6 @@ bool list_pop(List *list)
 
     if (list_is_empty(list))
     {
-        fprintf(stderr, ">>ERROR: Cannot pop an empty list\n");
         return false;
     }
 
@@ -203,7 +201,6 @@ bool list_remove_element(List *list, void *element)
 
     if (element == NULL)
     {
-        fprintf(stderr, ">>ERROR: Element cannot be NULL\n");
         return false;
     }
 
@@ -216,7 +213,7 @@ bool list_remove_element(List *list, void *element)
         }
     }
 
-    return true;
+    return false;
 }
 
 //// ==== Miscellaneous Functions === ////
@@ -224,6 +221,11 @@ bool list_remove_element(List *list, void *element)
 bool list_clear(List *list)
 {
     if (list == NULL)
+    {
+        return false;
+    }
+
+    if (list_is_empty(list))
     {
         return false;
     }
@@ -288,7 +290,7 @@ int list_index_of(List *list, void *element)
         return false;
     }
 
-    if (list == element)
+    if (element == NULL)
     {
         return false;
     }
