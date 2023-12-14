@@ -1,3 +1,4 @@
+#pragma once 
 #include <stdbool.h>
 
 typedef struct LLNode
@@ -7,6 +8,7 @@ typedef struct LLNode
     struct LLNode *prev;
 
 } LLNode;
+
 
 /**
  * this function initializes a linked-list Node
@@ -18,4 +20,4 @@ LLNode *ll_node_create();
  * this function destroys a linked-list Node
  * @return a boolean of true if the operation is successful
  */
-bool *ll_node_destroy();
+bool ll_node_destroy(LLNode *node);

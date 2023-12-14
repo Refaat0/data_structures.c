@@ -1,3 +1,4 @@
+#pragma once 
 #include "../include/ll_node.h"
 #include <stdbool.h>
 

@@ -1,3 +1,4 @@
+#pragma once 
 #include "../include/list.h"
 #include <assert.h>
 #include <stdio.h>

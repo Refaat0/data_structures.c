@@ -1,3 +1,4 @@
+#pragma once 
 #include "../include/linked_list.h"
 #include <assert.h>
 #include <stdio.h>
