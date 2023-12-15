@@ -1,33 +1,42 @@
-#pragma once 
+#pragma once
 #include "../include/linked_list.h"
 #include <assert.h>
 #include <stdio.h>
-
-//// ==== Testing Helper Functions ==== ////
-
-void test_ll_ensure_capacity()
-{
-    printf("Testing _ll_ensure_capacity...\n");
-    printf("Testing successful!\n");
-}
-
-void test_ll_trim_to_size()
-{
-    printf("Testing _ll_trim_to_size...\n");
-    printf("Testing successful!\n");
-}
 
 //// ==== Testing Linked-List "Life-Cycle" Functions ==== ////
 
 void test_linked_list_create()
 {
     printf("Testing ll_create()...\n");
+
+    // initialize a linked list
+    LinkedList *linked_list = ll_create();
+
+    // check if it has been initialized properly
+    assert(linked_list != NULL);
+    assert(linked_list->size == 0);
+    assert(linked_list->head == NULL);
+    assert(linked_list->tail == NULL);
+
+    ll_destroy(linked_list);
     printf("Testing successful!\n");
 }
 
 void test_linked_list_destroy()
 {
     printf("Testing ll_destroy()...\n");
+
+    // initialize a linked list & an array of elements
+    LinkedList *linked_list = ll_create();
+    int numbers[] = { 1, 2, 3 };
+
+    // append some elements to the linked list
+    ll_append(linked_list, &numbers[0]);
+    ll_append(linked_list, &numbers[1]);
+    ll_append(linked_list, &numbers[2]);
+
+    // check if the linked list was properly destroyed
+    assert(ll_destroy(linked_list) == true);
     printf("Testing successful!\n");
 }
 
@@ -121,7 +130,22 @@ void test_linked_list_set()
     printf("Testing successful!\n");
 }
 
-void test_linked_linked_list()
+void test_linked_list()
 {
-
+    test_linked_list_create();
+    test_linked_list_destroy();
+    test_linked_list_insert();
+    test_linked_list_insert_list();
+    test_linked_list_append();
+    test_linked_list_prepend();
+    test_linked_list_remove();
+    test_linked_list_pop();
+    test_linked_list_remove_element();
+    test_linked_list_clear();
+    test_linked_list_is_empty();
+    test_linked_list_is_full();
+    test_linked_list_contains();
+    test_linked_list_index_of();
+    test_linked_list_get();
+    test_linked_list_set();
 }

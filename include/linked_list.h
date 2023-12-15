@@ -4,32 +4,12 @@
 
 typedef struct LinkedList
 {
-    int capacity;
     int size;
 
     LLNode *head;
     LLNode *tail;
 
 } LinkedList;
-
-#define INITIAL_CAPACITY 32
-#define GROWING_RATE 2
-
-//// ==== Helper Functions ==== ////
-
-/**
- * this function increases the capacity of a specified linked-list if it is full
- * @param linked_list a pointer to a linked-list structure
- * @return a boolean of true if the operation is successful
- */
-bool _ll_ensure_capacity(LinkedList *linked_list);
-
-/**
- * this function reduces the capacity of a specified linked-list to its size
- * @param linked_list a pointer to a linked-list structure
- * @return a boolean of true if the operation is successful
- */
-bool _ll_trim_to_size(LinkedList *linked_list);
 
 //// ==== Linked List "Life-Cycle" Functions ==== ////
 
