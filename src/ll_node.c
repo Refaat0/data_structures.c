@@ -11,6 +11,10 @@ LLNode *ll_node_create()
         return NULL;
     }
 
+    node->element = NULL;
+    node->next = NULL;
+    node->prev = NULL;
+
     return node;
 }
 
