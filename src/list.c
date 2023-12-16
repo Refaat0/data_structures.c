@@ -1,4 +1,4 @@
-#include "../include/list.h"
+#include "../include/array-list.h"
 #include <stdbool.h>
 #include <stdlib.h>
 #include <string.h>
@@ -6,17 +6,17 @@
 
 //// ==== Helper Functions === ////
 
-bool _ensure_capacity(List *list)
+bool _ensure_capacity(ArrayList *array_list)
 {
-    if (list == NULL)
+    if (array_list == NULL)
     {
         return false;
     }
 
-    if (list_is_full(list))
+    if (list_is_full(array_list))
     {
-        list->collection = realloc(list->collection, (list->capacity * GROWING_RATE) * sizeof(void *));
-        list->capacity = list->capacity * GROWING_RATE;
+        array_list->collection = realloc(array_list->collection, (array_list->capacity * GROWING_RATE) * sizeof(void *));
+        array_list->capacity = array_list->capacity * GROWING_RATE;
 
         return true;
     }
@@ -24,61 +24,61 @@ bool _ensure_capacity(List *list)
     return false;
 }
 
-bool _trim_to_size(List *list)
+bool _trim_to_size(ArrayList *array_list)
 {
-    if (list == NULL)
+    if (array_list == NULL)
     {
         return false;
     }
 
-    list->collection = realloc(list->collection, list->size * sizeof(void *));
-    list->capacity = list->size;
+    array_list->collection = realloc(array_list->collection, array_list->size * sizeof(void *));
+    array_list->capacity = array_list->size;
 
     return true;
 }
 
 //// ==== List "Life-Cycle" Functions ==== ////
 
-List *list_create()
+ArrayList *list_create()
 {
-    List *list = malloc(sizeof(List));
-    if (list == NULL)
+    ArrayList *array_list = malloc(sizeof(ArrayList));
+    if (array_list == NULL)
     {
-        free(list);
+        free(array_list);
         return NULL;
     }
 
-    list->collection = malloc(sizeof(void *) * INITIAL_CAPACITY);
-    if (list->collection == NULL)
+    array_list->collection = malloc(sizeof(void *) * INITIAL_CAPACITY);
+    if (array_list->collection == NULL)
     {
-        free(list->collection);
-        free(list);
+        free(array_list->collection);
+        free(array_list);
         return NULL;
     }
 
-    list->capacity = INITIAL_CAPACITY;
-    list->size = 0;
+    array_list->capacity = INITIAL_CAPACITY;
+    array_list->size = 0;
 
-    return list;
+    return array_list;
 }
 
-bool list_destroy(List *list)
+bool list_destroy(ArrayList *array_list)
 {
-    if (list == NULL)
+    if (array_list == NULL)
     {
         return false;
     }
-    free(list->collection);
-    free(list);
+    free(array_list->collection);
+    free(array_list);
 
     return true;
 }
 
 //// ==== Insertion Functions === ////
 
-bool list_insert(List *list, void *element, int index)
+bool list_insert(ArrayList *array_list, void *element, int index)
 {
-    if (list == NULL)
+    if (array_list == NULL)
     {
         return false;
     }
@@ -88,47 +88,47 @@ bool list_insert(List *list, void *element, int index)
         return false;
     }
 
-    if (index < 0 || index > list->size)
+    if (index < 0 || index > array_list->size)
     {
         return false;
     }
 
-    _ensure_capacity(list);
+    _ensure_capacity(array_list);
 
     // i still dont understand why this works :(
-    for (int i = list->size; i > index; i--)
+    for (int i = array_list->size; i > index; i--)
     {
-        list->collection[i] = list->collection[i - 1];
+        array_list->collection[i] = array_list->collection[i - 1];
     }
-    list->collection[index] = element;
-    list->size++;
+    array_list->collection[index] = element;
+    array_list->size++;
 
     return true;
 }
 
-bool list_insert_list(List *list_alpha, List *list_bravo, int index)
+bool list_insert_list(ArrayList *array_list_alpha, ArrayList *array_list_bravo, int index)
 {
-    if (list_alpha == NULL || list_bravo == NULL)
+    if (array_list_alpha == NULL || array_list_bravo == NULL)
     {
         return false;
     }
 
-    if (index < 0 || index > list_alpha->size)
+    if (index < 0 || index > array_list_alpha->size)
     {
         return false;
     }
 
-    for (int i = 0; i < list_bravo->size; i++)
+    for (int i = 0; i < array_list_bravo->size; i++)
     {
-        list_insert(list_alpha, list_bravo->collection[i], index + i);
+        list_insert(array_list_alpha, array_list_bravo->collection[i], index + i);
     }
 
     return true;
 }
 
-bool list_append(List *list, void *element)
+bool list_append(ArrayList *array_list, void *element)
 {
-    if (list_insert(list, element, list->size))
+    if (list_insert(array_list, element, array_list->size))
     {
         return true;
     }
@@ -136,9 +136,9 @@ bool list_append(List *list, void *element)
     return false;
 }
 
-bool list_prepend(List *list, void *element)
+bool list_prepend(ArrayList *array_list, void *element)
 {
-    if (list_insert(list, element, 0))
+    if (list_insert(array_list, element, 0))
     {
         return true;
     }
@@ -148,53 +148,53 @@ bool list_prepend(List *list, void *element)
 
 //// ==== Deletion Functions ==== ////
 
-bool list_remove(List *list, int index)
+bool list_remove(ArrayList *array_list, int index)
 {
-    if (list == NULL)
+    if (array_list == NULL)
     {
         return false;
     }
 
-    if (index < 0 || index > list->size)
+    if (index < 0 || index > array_list->size)
     {
         return false;
     }
 
-    if (list_is_empty(list))
+    if (list_is_empty(array_list))
     {
         return false;
     }
 
-    for (int i = index; i < list->size; i++)
+    for (int i = index; i < array_list->size; i++)
     {
-        list->collection[i] = list->collection[i + 1];
+        array_list->collection[i] = array_list->collection[i + 1];
     }
 
-    list->size--;
+    array_list->size--;
 
     return true;
 }
 
-bool list_pop(List *list)
+bool list_pop(ArrayList *array_list)
 {
-    if (list == NULL)
+    if (array_list == NULL)
     {
         return false;
     }
 
-    if (list_is_empty(list))
+    if (list_is_empty(array_list))
     {
         return false;
     }
 
-    list->size--;
+    array_list->size--;
 
     return true;
 }
 
-bool list_remove_element(List *list, void *element)
+bool list_remove_element(ArrayList *array_list, void *element)
 {
-    if (list == NULL)
+    if (array_list == NULL)
     {
         return false;
     }
@@ -204,11 +204,11 @@ bool list_remove_element(List *list, void *element)
         return false;
     }
 
-    for (int i = 0; i < list->size; i++)
+    for (int i = 0; i < array_list->size; i++)
     {
-        if (list->collection[i] == element)
+        if (array_list->collection[i] == element)
         {
-            list_remove(list, i);
+            list_remove(array_list, i);
             return true;
         }
     }
@@ -218,63 +218,63 @@ bool list_remove_element(List *list, void *element)
 
 //// ==== Miscellaneous Functions === ////
 
-bool list_clear(List *list)
+bool list_clear(ArrayList *array_list)
 {
-    if (list == NULL)
+    if (array_list == NULL)
     {
         return false;
     }
 
-    if (list_is_empty(list))
+    if (list_is_empty(array_list))
     {
         return false;
     }
 
-    while (!list_is_empty(list))
+    while (!list_is_empty(array_list))
     {
-        list_pop(list);
+        list_pop(array_list);
     }
 
     return true;
 }
 
-bool list_is_empty(List *list)
+bool list_is_empty(ArrayList *array_list)
 {
-    if (list == NULL)
+    if (array_list == NULL)
     {
         return false;
     }
 
-    return list->size == 0;
+    return array_list->size == 0;
 }
 
-bool list_is_full(List *list)
+bool list_is_full(ArrayList *array_list)
 {
-    if (list == NULL)
+    if (array_list == NULL)
     {
         return false;
     }
 
-    return list->size == list->capacity;
+    return array_list->size == array_list->capacity;
 }
 
 
-bool list_contains(List *list, void *element)
+bool list_contains(ArrayList *array_list, void *element)
 {
-    if (list == NULL)
+    if (array_list == NULL)
     {
         return false;
     }
 
-    if (list == element)
+    if (array_list == element)
     {
         fprintf(stderr, ">>ERROR: Element cannot be NULL\n");
         return false;
     }
 
-    for (int i = 0; i < list->size; i++)
+    for (int i = 0; i < array_list->size; i++)
     {
-        if (list->collection[i] == element)
+        if (array_list->collection[i] == element)
         {
             return true;
         }
@@ -283,9 +283,9 @@ bool list_contains(List *list, void *element)
     return false;
 }
 
-int list_index_of(List *list, void *element)
+int list_index_of(ArrayList *array_list, void *element)
 {
-    if (list == NULL)
+    if (array_list == NULL)
     {
         return false;
     }
@@ -295,14 +295,14 @@ int list_index_of(List *list, void *element)
         return false;
     }
 
-    if (list_is_empty(list))
+    if (list_is_empty(array_list))
     {
         return -1;
     }
 
-    for (int i = 0; i < list->size; i++)
+    for (int i = 0; i < array_list->size; i++)
     {
-        if (list->collection[i] == element)
+        if (array_list->collection[i] == element)
         {
             return i;
         }
@@ -311,40 +311,40 @@ int list_index_of(List *list, void *element)
     return -1;
 }
 
-void *list_get(List *list, int index)
+void *list_get(ArrayList *array_list, int index)
 {
-    if (list == NULL)
+    if (array_list == NULL)
     {
         return NULL;
     }
 
-    if (index < 0 || index >= list->size)
+    if (index < 0 || index >= array_list->size)
     {
         return NULL;
     }
 
-    return list->collection[index];
+    return array_list->collection[index];
 }
 
-bool list_set(List *list, void *element, int index)
+bool list_set(ArrayList *array_list, void *element, int index)
 {
-    if (list == NULL)
+    if (array_list == NULL)
     {
         return false;
     }
 
-    if (list == element)
+    if (array_list == element)
     {
         fprintf(stderr, ">>ERROR: Element cannot be NULL\n");
         return false;
     }
 
-    if (index < 0 || index >= list->size)
+    if (index < 0 || index >= array_list->size)
     {
         return false;
     }
 
-    list->collection[index] = element;
+    array_list->collection[index] = element;
 
     return true;
 }

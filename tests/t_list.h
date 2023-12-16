@@ -1,5 +1,5 @@
 #pragma once 
-#include "../include/list.h"
+#include "../include/array-list.h"
 #include <assert.h>
 #include <stdio.h>
 
@@ -10,7 +10,7 @@ void test_ensure_capacity()
     printf("Testing _ensure_capacity...\n");
 
     // initialize a list & an element
-    List *list = list_create();
+    ArrayList *list = list_create();
     int angel_int = 7;
 
     // unhappy path
@@ -40,7 +40,7 @@ void test_trim_to_size()
     printf("Testing _trim_to_size...\n");
 
     // initialize a list; its starting capacity is the INITIAL_CAPACITY
-    List *list = list_create();
+    ArrayList *list = list_create();
     int a = 7;
 
     // unhappy path
@@ -66,7 +66,7 @@ void test_list_create()
     printf("Testing list_create()...\n");
 
     // initialize a list
-    List *list = list_create();
+    ArrayList *list = list_create();
 
     // checking if it has been initialized properly
     assert(list != NULL);
@@ -82,7 +82,7 @@ void test_list_destroy()
     printf("Testing list_destroy()...\n");
 
     // how do i test this :(
-    List *list = list_create();
+    ArrayList *list = list_create();
     assert(list_destroy(list) == true);
 
     printf("Testing successful!\n");
@@ -94,7 +94,7 @@ void test_list_insert()
 {
     printf("Testing list_insert()...\n");
 
-    List *list = list_create();
+    ArrayList *list = list_create();
 
     int numbers[] = {1, 2, 3,
                      4, 5, 6,
@@ -138,8 +138,8 @@ void test_list_insert_list()
     printf("Testing list_insert_list()...\n");
 
     // initialize two different lists
-    List *list_alpha = list_create();
-    List *list_bravo = list_create();
+    ArrayList *list_alpha = list_create();
+    ArrayList *list_bravo = list_create();
 
     // initialize an array of odd integers to append to list_alpha
     int numbers_odd[] = {1, 3, 5};
@@ -182,7 +182,7 @@ void test_list_append()
     printf("Testing list_append()...\n");
 
     // initalize a list
-    List *list = list_create();
+    ArrayList *list = list_create();
 
     // initialize an array of numbers
     int numbers[] = {1, 2, 3};
@@ -207,7 +207,7 @@ void test_list_prepend()
     printf("Testing list_prepend()...\n");
 
     // initialize a list
-    List *list = list_create();
+    ArrayList *list = list_create();
 
     // initialize an array of numbers
     int numbers[] = {1, 2, 3};
@@ -234,7 +234,7 @@ void test_list_remove()
     printf("Testing list_remove()...\n");
 
     // initialize the list
-    List *list = list_create();
+    ArrayList *list = list_create();
 
     // initialize an array of numbers
     int numbers[] = {1, 2, 3};
@@ -284,7 +284,7 @@ void test_list_pop()
     printf("Testing list_pop()...\n");
 
     // initialize a list & a numbers array
-    List *list = list_create();
+    ArrayList *list = list_create();
     int numbers[] = {1, 2, 3};
 
     // append the list with elements from the numbers array
@@ -324,7 +324,7 @@ void test_list_remove_element()
     printf("Testing list_remove_element()...\n");
 
     // initialize a list & a numbers array
-    List *list = list_create();
+    ArrayList *list = list_create();
     int numbers[] = {1, 2, 3};
 
     // append the list with elements from the numbers array
@@ -366,7 +366,7 @@ void test_list_clear()
     printf("Testing list_clear()...\n");
 
     // initialize a list & a numbers array
-    List *list = list_create();
+    ArrayList *list = list_create();
     int numbers[] = {1, 2, 3};
 
     // unhappy path
@@ -393,7 +393,7 @@ void test_list_is_empty()
     printf("Testing list_is_empty()...\n");
 
     // initialize a list & an integer
-    List *list = list_create();
+    ArrayList *list = list_create();
     int silly_integer = 7;
 
     // unhappy paths
@@ -415,7 +415,7 @@ void test_list_is_full()
     printf("Testing list_is_full()...\n");
 
     // initialize a list & an integer
-    List *list = list_create();
+    ArrayList *list = list_create();
     int silly_integer = 7;
 
     // unhappy paths
@@ -448,7 +448,7 @@ void test_list_contains()
     printf("Testing list_contains()...\n");
 
     // initialize a list & an array of numbers
-    List *list = list_create();
+    ArrayList *list = list_create();
     int numbers[] = {1, 2, 3};
     int evil_int = 100;
 
@@ -478,7 +478,7 @@ void test_list_index_of()
     printf("Testing list_index_of()...\n");
 
     // initialize a list & an array of numbers
-    List *list = list_create();
+    ArrayList *list = list_create();
     int numbers[] = {7, 14, 21};
     int evil_int = 0;
 
@@ -508,7 +508,7 @@ void test_list_get()
     printf("Testing list_get()...\n");
 
     // initialize a list & a numbers array
-    List *list = list_create();
+    ArrayList *list = list_create();
     int numbers[] = { 7, 14, 21 };
 
     // unhappy paths
@@ -534,7 +534,7 @@ void test_list_set()
     printf("Testing list_set()...\n");
 
     // initialize a list & some integers
-    List *list = list_create();
+    ArrayList *list = list_create();
     int silly_integer_minding_owns_business = 10;
     int evil_integer_stealing_silly_integers_index = 7;
 
