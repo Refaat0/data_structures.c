@@ -24,32 +24,53 @@ LinkedList *ll_create()
 
 bool ll_destroy(LinkedList *linked_list)
 {
-    // nothing to free
+    // there is no double-linked-list, & as an extension, nodes to free
     if (linked_list == NULL)
     {
         return false;
     }
 
-    // no nodes to free; only free the linked list structure
+    // there is a doubly-linked-list to free, but no nodes attached to it
     if (linked_list->head == NULL || linked_list->tail == NULL)
     {
         free(linked_list);
         return true;
     }
 
-    // free all the nodes & then the list
-    LLNode *temp  = linked_list->head;
-    while (temp != NULL)
+    // there is a doubly-linked-list to free, and a single node (head & tail)
+    if (linked_list->head &&
+        linked_list->tail &&
+        linked_list->head->next == NULL &&
+        linked_list->tail->prev == NULL)
     {
-        temp = temp->next;
+        // head & tail are the same nodes for DLL's with a size of 1!
         free(linked_list->head);
-        linked_list->head = temp;
+        free(linked_list->tail);
+        return true;
     }
 
-    linked_list = NULL;
-    free(linked_list);
+    /**
+     * there is a doubly-linked-list & nodes to free,
+     * we need to free all the nodes attached to the dll before we free the dll,
+     * so we dont get any memory leaks!
+     */
+    // traverses the linked-list & free's ever single node
+    LLNode *cursor = linked_list->head;
+    while (cursor != NULL)
+    {
+        cursor = cursor->next;
+        free(linked_list->head);
+        linked_list->head = cursor;
+    }
 
-    return false;
+    // good practice i think?
+    linked_list = NULL;
+
+    // cleanup!
+    free(linked_list);
+    free(cursor);
+
+    return true;
 }
 
 //// ==== Insertion Functions === ////
