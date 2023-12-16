@@ -24,27 +24,30 @@ LinkedList *ll_create()
 
 bool ll_destroy(LinkedList *linked_list)
 {
+    // nothing to free
     if (linked_list == NULL)
     {
         return false;
     }
 
+    // no nodes to free; only free the linked list structure
     if (linked_list->head == NULL || linked_list->tail == NULL)
     {
-        return false;
+        free(linked_list);
+        return true;
     }
 
-    LLNode *cursor = linked_list->head;
-    LLNode *temp;
+    // free all the nodes & then the list
+    LLNode *temp  = linked_list->head;
 
-    while (cursor != NULL)
+    while (temp != NULL)
     {
-        temp = cursor;
-        cursor = cursor->next;
-        free(temp);
+        temp = temp->next;
+        free(linked_list->head);
+        linked_list->head = temp;
     }
 
-    free(cursor);
+    linked_list = NULL;
     free(linked_list);
 
     return false;

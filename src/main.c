@@ -1,7 +1,7 @@
 #include "../tests/t_list.h"
 
 #include "../include/linked_list.h"
-
+#include <stdlib.h>
 #include <stdio.h>
 
 int main(void)
@@ -20,22 +20,6 @@ int main(void)
     ll_prepend(flowers, &flowers_array[2]);
     ll_prepend(flowers, &flowers_array[3]);
     ll_prepend(flowers, &flowers_array[4]);
-
-    ll_pop(flowers);
-    ll_pop(flowers);
-
-    printf("%s\n", *(char **)flowers->tail->element);
-
-
-    // LLNode *cursor = flowers->head;
-
-    // while (cursor != NULL)
-    // {
-    //     printf("%s\n", *(char**)cursor->element);
-    //     cursor = cursor->next;
-    // }
-
-    ll_destroy(flowers);
 
     return 0;
 }
