@@ -39,7 +39,6 @@ bool ll_destroy(LinkedList *linked_list)
 
     // free all the nodes & then the list
     LLNode *temp  = linked_list->head;
-
     while (temp != NULL)
     {
         temp = temp->next;
