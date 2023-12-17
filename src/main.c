@@ -1,7 +1,7 @@
-#include "../tests/t_list.h"
+#include "../tests/test-array-list.h"
+#include "../tests/test-doubly-linked-list.h"
 
 int main(void)
 {
-    test_list();
     return 0;
 }

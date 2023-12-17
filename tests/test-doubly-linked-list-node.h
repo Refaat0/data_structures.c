@@ -1,42 +1,42 @@
 #pragma once 
-#include "../include/ll_node.h"
+#include "../include/doubly-linked-list-node.h"
 #include <assert.h>
 #include <stdio.h>
 
-void test_ll_node_create()
+void test_dll_node_create()
 {
     printf("Testing ll_node_create...\n");
 
-    LLNode *node = ll_node_create();
+    DLLNode *node = dll_node_create();
 
     assert(node != NULL);
     assert(node->element != NULL);
     assert(node->next != NULL);
     assert(node->prev != NULL);
 
-    ll_node_destroy(node);
+    dll_node_destroy(node);
 
     printf("Testing successful!\n");
 }
 
-void test_ll_node_destroy()
+void test_dll_node_destroy()
 {
     printf("Testing ll_node_destroy...\n");
 
-    LLNode *node = ll_node_create();
-    assert(ll_node_destroy(node) == true);
+    DLLNode *node = dll_node_create();
+    assert(dll_node_destroy(node) == true);
 
     printf("Testing successful!\n");
 }
 
-void test_ll_node_pointers()
+void test_dll_node_pointers()
 {
     printf("Testing the next/prev pointers for ll_node...\n");
 
     // initialize nodes
-    LLNode *node = ll_node_create();
-    LLNode *next = ll_node_create();
-    LLNode *prev = ll_node_create();
+    DLLNode *node = dll_node_create();
+    DLLNode *next = dll_node_create();
+    DLLNode *prev = dll_node_create();
 
     // initialize integers
     int integer_next = 12;
@@ -63,7 +63,7 @@ void test_ll_node_pointers()
 
 void test_ll_node()
 {
-    test_ll_node_create();
-    test_ll_node_destroy();
-    test_ll_node_pointers();
+    test_dll_node_create();
+    test_dll_node_destroy();
+    test_dll_node_pointers();
 }

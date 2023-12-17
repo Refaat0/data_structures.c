@@ -1,5 +1,5 @@
 #pragma once
-#include "../include/linked_list.h"
+#include "../include/doubly-linked-list.h"
 #include <assert.h>
 #include <stdio.h>
 
@@ -10,7 +10,7 @@ void test_linked_list_create()
     printf("Testing ll_create()...\n");
 
     // initialize a linked list
-    LinkedList *linked_list = ll_create();
+    DoublyLinkedList *linked_list = dll_create();
 
     // check if it has been initialized properly
     assert(linked_list != NULL);
@@ -18,7 +18,7 @@ void test_linked_list_create()
     assert(linked_list->head == NULL);
     assert(linked_list->tail == NULL);
 
-    ll_destroy(linked_list);
+    dll_destroy(linked_list);
     printf("Testing successful!\n");
 }
 
@@ -27,16 +27,16 @@ void test_linked_list_destroy()
     printf("Testing ll_destroy()...\n");
 
     // initialize a linked list & an array of elements
-    LinkedList *linked_list = ll_create();
+    DoublyLinkedList *linked_list = dll_create();
     int numbers[] = { 1, 2, 3 };
 
     // append some elements to the linked list
-    ll_append(linked_list, &numbers[0]);
-    ll_append(linked_list, &numbers[1]);
-    ll_append(linked_list, &numbers[2]);
+    dll_append(linked_list, &numbers[0]);
+    dll_append(linked_list, &numbers[1]);
+    dll_append(linked_list, &numbers[2]);
 
     // check if the linked list was properly destroyed
-    assert(ll_destroy(linked_list) == true);
+    assert(dll_destroy(linked_list) == true);
     printf("Testing successful!\n");
 }
 

@@ -1,14 +1,14 @@
-#include "../include/linked_list.h"
-#include "../include/ll_node.h"
+#include "../include/doubly-linked-list.h"
+#include "../include/doubly-linked-list-node.h"
 #include <stdbool.h>
 #include <stdlib.h>
 #include <stdio.h>
 
 //// ==== Linked List "Life-Cycle" Functions ==== ////
 
-LinkedList *ll_create()
+DoublyLinkedList *dll_create()
 {
-    LinkedList *linked_list = malloc(sizeof(LinkedList));
+    DoublyLinkedList *linked_list = malloc(sizeof(DoublyLinkedList));
     if (linked_list == NULL)
     {
         free(linked_list);
@@ -22,7 +22,7 @@ LinkedList *ll_create()
     return linked_list;
 }
 
-bool ll_destroy(LinkedList *linked_list)
+bool dll_destroy(DoublyLinkedList *linked_list)
 {
     // there is no double-linked-list, & as an extension, nodes to free
     if (linked_list == NULL)
@@ -55,7 +55,7 @@ bool ll_destroy(LinkedList *linked_list)
      * so we dont get any memory leaks!
      */
     // traverses the linked-list & free's ever single node
-    LLNode *cursor = linked_list->head;
+    DLLNode *cursor = linked_list->head;
     while (cursor != NULL)
     {
         cursor = cursor->next;
@@ -75,7 +75,7 @@ bool ll_destroy(LinkedList *linked_list)
 
 //// ==== Insertion Functions === ////
 
-bool ll_insert(LinkedList *linked_list, void *element, int index)
+bool dll_insert(DoublyLinkedList *linked_list, void *element, int index)
 {
     if (linked_list == NULL || element == NULL)
     {
@@ -87,18 +87,18 @@ bool ll_insert(LinkedList *linked_list, void *element, int index)
         return false;
     }
 
-    LLNode *new_node = ll_node_create(element);
+    DLLNode *new_node = dll_node_create();
     new_node->element = element;
 
     //
     if (index == 0)
     {
-        ll_append(linked_list, element);
+        dll_append(linked_list, element);
         return true;
     }
     if (index >= linked_list->size)
     {
-        ll_prepend(linked_list, element);
+        dll_prepend(linked_list, element);
         return true;
     }
 
@@ -111,7 +111,7 @@ bool ll_insert(LinkedList *linked_list, void *element, int index)
         return true;
     }
 
-    LLNode *cursor = linked_list->head;
+    DLLNode *cursor = linked_list->head;
 
     for (int i = 0; i < index - 1 && cursor != NULL; i++)
     {
@@ -133,19 +133,19 @@ bool ll_insert(LinkedList *linked_list, void *element, int index)
     return false;
 }
 
-bool ll_insert_ll(LinkedList *linked_list_alpha, LinkedList *linked_list_bravo, int index)
+bool dll_insert_ll(DoublyLinkedList *linked_list_alpha, DoublyLinkedList *linked_list_bravo, int index)
 {
     return false;
 }
 
-bool ll_append(LinkedList *linked_list, void *element)
+bool dll_prepend(DoublyLinkedList *linked_list, void *element)
 {
     if (linked_list == NULL || element == NULL)
     {
         return false;
     }
 
-    LLNode *new_node = ll_node_create(element);
+    DLLNode *new_node = dll_node_create();
     new_node->element = element;
 
     // make the node the head & tail if it is the first element to be added to this list
@@ -167,14 +167,14 @@ bool ll_append(LinkedList *linked_list, void *element)
     return true;
 }
 
-bool ll_prepend(LinkedList *linked_list, void *element)
+bool dll_append(DoublyLinkedList *linked_list, void *element)
 {
     if (linked_list == NULL || element == NULL)
     {
         return false;
     }
 
-    LLNode *new_node = ll_node_create();
+    DLLNode *new_node = dll_node_create();
     new_node->element = element;
 
     // make the node the head & tail if it is the first element to be added to this list
@@ -198,53 +198,54 @@ bool ll_prepend(LinkedList *linked_list, void *element)
 
 //// ==== Deletion Functions ==== ////
 
-bool ll_remove(LinkedList *linked_list, int index)
+bool dll_remove(DoublyLinkedList *linked_list, int index)
 {
     return false;
 }
 
-bool ll_pop(LinkedList *linked_list)
+bool dll_pop(DoublyLinkedList *linked_list)
 {
     return true;
 }
 
-bool ll_remove_element(LinkedList *linked_list, void *element)
+bool dll_remove_element(DoublyLinkedList *linked_list, void *element)
 {
     return false;
 }
 
-bool ll_clear(LinkedList *linked_list)
+bool dll_clear(DoublyLinkedList *linked_list)
 {
     return false;
 }
 
 //// ==== Miscellaneous Functions === ////
 
-bool ll_is_empty(LinkedList *linked_list)
+bool dll_is_empty(DoublyLinkedList *linked_list)
 {
     return linked_list->size == 0;
 }
 
-// bool ll_is_full(LinkedList *linked_list)
+// bool dll_is_full(LinkedList *linked_list)
 // {
 //     return linked_list->size == 0;
 // }
 
-bool ll_contains(LinkedList *linked_list, void *element)
+bool dll_contains(DoublyLinkedList *linked_list, void *element)
 {
     return false;
 }
 
-int ll_index_of(LinkedList *linked_list, void *element)
+int dll_index_of(DoublyLinkedList *linked_list, void *element)
 {
     return 0;
 }
 
-void *ll_get(LinkedList *linked_list, int index)
+void *dll_get(DoublyLinkedList *linked_list, int index)
 {
+    return NULL;
 }
 
-bool ll_set(LinkedList *linked_list, void *element, int index)
+bool dll_set(DoublyLinkedList *linked_list, void *element, int index)
 {
     return false;
 }

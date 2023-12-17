@@ -1,10 +1,10 @@
-#include "../include/ll_node.h"
+#include "../include/doubly-linked-list-node.h"
 #include <stdbool.h>
 #include <stdlib.h>
 
-LLNode *ll_node_create()
+DLLNode *dll_node_create()
 {
-    LLNode *node = malloc(sizeof(LLNode));
+    DLLNode *node = malloc(sizeof(DLLNode));
     if (node == NULL)
     {
         free(node);
@@ -18,7 +18,7 @@ LLNode *ll_node_create()
     return node;
 }
 
-bool ll_node_destroy(LLNode *node)
+bool ll_node_destroy(DLLNode *node)
 {
     if (node == NULL)
     {
