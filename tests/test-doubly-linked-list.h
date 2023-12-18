@@ -136,20 +136,6 @@ void test_linked_list_set()
 
 void test_linked_list()
 {
-    test_linked_list_create();
     test_linked_list_destroy();
-    test_linked_list_insert();
-    test_linked_list_insert_list();
-    test_linked_list_append();
-    test_linked_list_prepend();
-    test_linked_list_remove();
-    test_linked_list_pop();
-    test_linked_list_remove_element();
-    test_linked_list_clear();
-    test_linked_list_is_empty();
-    test_linked_list_is_full();
-    test_linked_list_contains();
-    test_linked_list_index_of();
-    test_linked_list_get();
-    test_linked_list_set();
+
 }

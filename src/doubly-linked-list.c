@@ -24,34 +24,34 @@ DoublyLinkedList *dll_create()
 
 bool dll_destroy(DoublyLinkedList *linked_list)
 {
-    // there is no double-linked-list, & as an extension, nodes to free
-    if (linked_list == NULL)
-    {
-        return false;
-    }
+    // // there is no double-linked-list, & as an extension, nodes to free
+    // if (linked_list == NULL)
+    // {
+    //     return false;
+    // }
 
-    // there is a doubly-linked-list to free, but no nodes attached to it
-    if (linked_list->head == NULL || linked_list->tail == NULL)
-    {
-        free(linked_list);
-        linked_list = NULL;
-        return true;
-    }
+    // // there is a doubly-linked-list to free, but no nodes attached to it
+    // if (linked_list->head == NULL || linked_list->tail == NULL)
+    // {
+    //     free(linked_list);
+    //     linked_list = NULL;
+    //     return true;
+    // }
 
-    // there is a doubly-linked-list to free, and a single node (head & tail)
-    if (linked_list->head &&
-        linked_list->tail &&
-        linked_list->head->next == NULL &&
-        linked_list->tail->prev == NULL)
-    {
-        // head & tail are the same nodes for DLL's with a size of 1!
-        free(linked_list->head);
-        linked_list->head = NULL;
+    // // there is a doubly-linked-list to free, and a single node (head & tail)
+    // if (linked_list->head &&
+    //     linked_list->tail &&
+    //     linked_list->head->next == NULL &&
+    //     linked_list->tail->prev == NULL)
+    // {
+    //     // head & tail are the same nodes for DLL's with a size of 1!
+    //     free(linked_list->head);
+    //     linked_list->head = NULL;
 
-        free(linked_list->tail);
-        linked_list->tail = NULL;
-        return true;
-    }
+    //     free(linked_list->tail);
+    //     linked_list->tail = NULL;
+    //     return true;
+    // }
 
     /**
      * there is a doubly-linked-list, & nodes to free,
@@ -68,8 +68,6 @@ bool dll_destroy(DoublyLinkedList *linked_list)
     }
 
     linked_list->head = NULL;
-
-    free(linked_list->tail);
     linked_list->tail = NULL;
 
     free(linked_list);
