@@ -37,6 +37,7 @@ void test_linked_list_destroy()
 
     // check if the linked list was properly destroyed
     assert(dll_destroy(linked_list) == true);
+    
     printf("Testing successful!\n");
 }
 
@@ -45,6 +46,9 @@ void test_linked_list_destroy()
 void test_linked_list_insert()
 {
     printf("Testing ll_insert()...\n");
+
+
+
     printf("Testing successful!\n");
 }
 

@@ -34,6 +34,7 @@ bool dll_destroy(DoublyLinkedList *linked_list)
     if (linked_list->head == NULL || linked_list->tail == NULL)
     {
         free(linked_list);
+        linked_list = NULL;
         return true;
     }
 
@@ -45,7 +46,10 @@ bool dll_destroy(DoublyLinkedList *linked_list)
     {
         // head & tail are the same nodes for DLL's with a size of 1!
         free(linked_list->head);
+        linked_list->head = NULL;
+
         free(linked_list->tail);
+        linked_list->tail = NULL;
         return true;
     }
 
@@ -54,7 +58,7 @@ bool dll_destroy(DoublyLinkedList *linked_list)
      * we need to free all the nodes attached to the dll before we free the dll,
      * so we dont get any memory leaks!
      */
-    // traverses the linked-list & free's ever single node
+    // traverses the linked-list & free's every node
     DLLNode *cursor = linked_list->head;
     while (cursor != NULL)
     {
@@ -63,13 +67,13 @@ bool dll_destroy(DoublyLinkedList *linked_list)
         linked_list->head = cursor;
     }
 
-    // cleanup!
-    free(linked_list->tail);
-    free(linked_list);
-    free(cursor);
-
     linked_list->head = NULL;
+
+    free(linked_list->tail);
     linked_list->tail = NULL;
+
+    free(linked_list);
+    linked_list = NULL;
 
     return true;
 }
