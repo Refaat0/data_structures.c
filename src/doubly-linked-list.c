@@ -80,10 +80,16 @@ bool dll_destroy(DoublyLinkedList *linked_list)
 
 bool dll_insert(DoublyLinkedList *linked_list, void *element, int index)
 {
-    if (linked_list == NULL || element == NULL)
+    if (linked_list == NULL)
     {
         return false;
     }
+
+    if (element == NULL)
+    {
+        return false;
+    }
+    
     if (index < 0 || index > linked_list->size)
     {
         return false;
@@ -98,7 +104,6 @@ bool dll_insert(DoublyLinkedList *linked_list, void *element, int index)
         dll_prepend(linked_list, element);
         return true;
     }
-
     // basically prepending an element
     if (index >= linked_list->size)
     {
@@ -133,7 +138,7 @@ bool dll_insert(DoublyLinkedList *linked_list, void *element, int index)
     cursor->next = new_node;
     linked_list->size++;
 
-    return false;
+    return true;
 }
 
 bool dll_insert_ll(DoublyLinkedList *linked_list_alpha, DoublyLinkedList *linked_list_bravo, int index)
