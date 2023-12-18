@@ -3,8 +3,5 @@
 
 int main(void)
 {
-    DoublyLinkedList *flowers = dll_create();
-    char *array[] = {"Sunflowers", "Roses", "Tulips", "Orchisasdasdas123213sds"};
-
     return 0;
 }
