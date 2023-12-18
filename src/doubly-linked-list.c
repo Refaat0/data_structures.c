@@ -205,6 +205,24 @@ bool dll_remove(DoublyLinkedList *linked_list, int index)
 
 bool dll_pop(DoublyLinkedList *linked_list)
 {
+    if (linked_list == NULL)
+    {
+        return false;
+    }
+
+    if (dll_is_empty(linked_list))
+    {
+        return false;
+    }
+    
+    /**
+     * after setting the DLL's new tail to be the old tails previous node, 
+     * that previous node still points to old tail in it's "next" pointer
+    */
+    linked_list->tail = linked_list->tail->prev;
+    free(linked_list->tail->next);
+    linked_list->tail->next = NULL;
+
     return true;
 }
 
@@ -224,7 +242,6 @@ bool dll_is_empty(DoublyLinkedList *linked_list)
 {
     return linked_list->size == 0;
 }
-
 
 bool dll_contains(DoublyLinkedList *linked_list, void *element)
 {
