@@ -225,11 +225,6 @@ bool dll_is_empty(DoublyLinkedList *linked_list)
     return linked_list->size == 0;
 }
 
-// bool dll_is_full(LinkedList *linked_list)
-// {
-//     return linked_list->size == 0;
-// }
-
 bool dll_contains(DoublyLinkedList *linked_list, void *element)
 {
     return false;

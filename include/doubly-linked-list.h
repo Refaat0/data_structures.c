@@ -102,13 +102,6 @@ bool dll_clear(DoublyLinkedList *linked_list);
 bool dll_is_empty(DoublyLinkedList *linked_list);
 
 /**
- * this function checks if a DoublyLinkedList specified in the function parameters is full
- * @param linked_list a pointer to a DoublyLinkedList structure
- * @return a boolean of true if DoublyLinkedList is full
- */
-bool dll_is_full(DoublyLinkedList *linked_list);
-
-/**
  * this function checks if an element is in a DoublyLinkedList specified in the function parameters
  * @param linked_list a pointer to a DoublyLinkedList structure
  * @param element a void pointer to an element
