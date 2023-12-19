@@ -26,5 +26,7 @@ bool ll_node_destroy(DLLNode *node)
     }
 
     free(node);
+    node = NULL;
+
     return true;
 }
