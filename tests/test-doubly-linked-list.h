@@ -336,8 +336,16 @@ void test_linked_list_remove_element()
     assert(dll_append(flowers_list, &flowers_array[4]) == true);
 
     // unhappy paths
+    assert(dll_remove_element(NULL, &flowers_array[0]) == false);
+    assert(dll_remove_element(flowers_list, NULL) == false);
 
-    // problem with deleting an element if it is the tail
+    assert(dll_remove_element(flowers_list, &flowers_array[0]) == true);
+    assert(dll_remove_element(flowers_list, &flowers_array[2]) == true);
+    assert(dll_remove_element(flowers_list, &flowers_array[4]) == true);
+
+    assert(strcmp(*(char**)dll_get(flowers_list, 0), "Rose") == 0);
+    assert(strcmp(*(char**)dll_get(flowers_list, 1), "Orchids") == 0);
+
 
     dll_destroy(flowers_list);
     printf("Testing successful!\n");
@@ -517,15 +525,15 @@ void test_linked_list_set()
 
 void test_linked_list()
 {
-    // test_linked_list_create();
-    // test_linked_list_destroy();
-    // test_linked_list_insert();
-    // test_linked_list_insert_list();
-    // test_linked_list_append();
-    // test_linked_list_prepend();
-    // test_linked_list_remove();
-    // test_linked_list_pop();
-    // test_linked_list_remove_element();
+    test_linked_list_create();
+    test_linked_list_destroy();
+    test_linked_list_insert();
+    test_linked_list_insert_list();
+    test_linked_list_append();
+    test_linked_list_prepend();
+    test_linked_list_remove();
+    test_linked_list_pop();
+    test_linked_list_remove_element();
     test_linked_list_clear();
     test_linked_list_is_empty();
     test_linked_list_contains();
