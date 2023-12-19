@@ -324,7 +324,9 @@ void test_linked_list_is_empty()
     DoublyLinkedList *flowers_list = dll_create();
     char *flowers_array[] = {"Sunflower", "Rose", "Lily"};
 
-    //
+    // yb
+
+    // happy paths
     assert(dll_is_empty(flowers_list) == true);
 
     // append some elements the list
@@ -332,6 +334,7 @@ void test_linked_list_is_empty()
     assert(dll_append(flowers_list, &flowers_array[1]) == true);
     assert(dll_append(flowers_list, &flowers_array[2]) == true);
 
+    // dll is no longer empty after appending stuff to it (duh!)
     assert(dll_is_empty(flowers_list) == false);
 
     dll_destroy(flowers_list);
@@ -345,19 +348,22 @@ void test_linked_list_contains()
     // initialize a linked list
     DoublyLinkedList *flowers_list = dll_create();
     char *flowers_array[] = {"Sunflower", "Rose", "Lily"};
-
     char *evil_string = "Red Spider Lily";
 
     // append some elements the list
-    assert(dll_append(flowers_list, &flowers_array[0]) == true);
-    assert(dll_append(flowers_list, &flowers_array[1]) == true);
-    assert(dll_append(flowers_list, &flowers_array[2]) == true);
+    dll_append(flowers_list, &flowers_array[0]);
+    dll_append(flowers_list, &flowers_array[1]);
+    dll_append(flowers_list, &flowers_array[2]);
 
+    // unhappy paths
+    assert(dll_contains(flowers_list, &evil_string) == false);  // testing for a non existant string
+    assert(dll_contains(NULL, &flowers_array[0]) == false);     // null dll pointer
+    assert(dll_contains(flowers_list, NULL) == false);          // null element pointer
+
+    // happy paths
     assert(dll_contains(flowers_list, &flowers_array[0]) == true);
     assert(dll_contains(flowers_list, &flowers_array[1]) == true);
     assert(dll_contains(flowers_list, &flowers_array[2]) == true);
-
-    assert(dll_contains(flowers_list, &evil_string) == false);
 
     dll_destroy(flowers_list);
     printf("Testing successful!\n");
@@ -378,9 +384,8 @@ void test_linked_list_index_of()
     dll_append(flowers_list, &flowers_array[2]);
 
     // unhappy paths
-    assert(dll_index_of(flowers_list, &evil_string) == -1); // index of non existant element
-    assert(dll_index_of(NULL, &flowers_array[0]));          // null dll pointer
-    assert(dll_index_of(flowers_list, 100));                // index out of bounds
+    assert(dll_index_of(flowers_list, &evil_string) == -1); // index of a non-existant element
+    assert(dll_index_of(NULL, &flowers_array[0]) == -1);    // null dll pointer
 
     // happy paths
     assert(dll_index_of(flowers_list, &flowers_array[0]) == 0);

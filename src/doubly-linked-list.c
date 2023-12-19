@@ -322,6 +322,11 @@ bool dll_remove_element(DoublyLinkedList *linked_list, void *element)
 
 bool dll_clear(DoublyLinkedList *linked_list)
 {
+    if (linked_list == NULL)
+    {
+        return false;
+    }
+
     DLLNode *cursor = linked_list->head;
     while (cursor != NULL)
     {
@@ -347,6 +352,16 @@ bool dll_is_empty(DoublyLinkedList *linked_list)
 
 bool dll_contains(DoublyLinkedList *linked_list, void *element)
 {
+    if (linked_list == NULL)
+    {
+        return false;
+    }
+
+    if (element == NULL)
+    {
+        return NULL;
+    }
+
     DLLNode *cursor = linked_list->head;
     while (cursor != NULL)
     {
@@ -363,6 +378,11 @@ bool dll_contains(DoublyLinkedList *linked_list, void *element)
 
 int dll_index_of(DoublyLinkedList *linked_list, void *element)
 {
+    if (linked_list == NULL)
+    {
+        return -1;
+    }
+
     DLLNode *cursor = linked_list->head;
     int index = 0;
 
@@ -407,8 +427,22 @@ void *dll_get(DoublyLinkedList *linked_list, int index)
 
 bool dll_set(DoublyLinkedList *linked_list, void *element, int index)
 {
-    DLLNode *cursor = linked_list->head;
+    if (linked_list == NULL)
+    {
+        return false;
+    }
 
+    if (element == NULL)
+    {
+        return false;
+    }
+
+    if (index < 0 || index > linked_list->size)
+    {
+        return NULL;
+    }
+
+    DLLNode *cursor = linked_list->head;
     for (int i = 0; i < index; i++)
     {
         cursor = cursor->next;
