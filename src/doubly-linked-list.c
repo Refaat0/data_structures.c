@@ -89,7 +89,7 @@ bool dll_insert(DoublyLinkedList *linked_list, void *element, int index)
     {
         return false;
     }
-    
+
     if (index < 0 || index > linked_list->size)
     {
         return false;
@@ -270,6 +270,20 @@ bool dll_pop(DoublyLinkedList *linked_list)
         return false;
     }
 
+    // handling a dll with a single node
+    if (linked_list->size == 1)
+    {
+        free(linked_list->head);
+        linked_list->head = NULL;
+
+        free(linked_list->tail);
+        linked_list->tail = NULL;
+
+        linked_list->size--;
+
+        return true;
+    }
+
     /**
      * after setting the DLL's new tail to be the old tails previous node,
      * that previous node still points to old tail in it's "next" pointer
@@ -285,6 +299,16 @@ bool dll_pop(DoublyLinkedList *linked_list)
 
 bool dll_remove_element(DoublyLinkedList *linked_list, void *element)
 {
+    if (linked_list == NULL)
+    {
+        return false;
+    }
+
+    if (element == NULL)
+    {
+        return NULL;
+    }
+
     int index = dll_index_of(linked_list, element);
 
     if (index == -1)

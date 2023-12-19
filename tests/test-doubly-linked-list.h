@@ -148,7 +148,7 @@ void test_linked_list_append()
     // unhappy paths
     assert(dll_append(NULL, &flowers_array[0]) == false);
     assert(dll_append(flowers_list, NULL) == false);
-    
+
     // append some elements the list
     assert(dll_append(flowers_list, &flowers_array[0]) == true);
     assert(dll_append(flowers_list, &flowers_array[1]) == true);
@@ -158,7 +158,6 @@ void test_linked_list_append()
     assert(dll_index_of(flowers_list, &flowers_array[0]) == 0);
     assert(dll_index_of(flowers_list, &flowers_array[1]) == 1);
     assert(dll_index_of(flowers_list, &flowers_array[2]) == 2);
-
 
     dll_destroy(flowers_list);
 
@@ -176,7 +175,7 @@ void test_linked_list_prepend()
     // unhappy paths
     assert(dll_prepend(NULL, &flowers_array[0]) == false);
     assert(dll_prepend(flowers_list, NULL) == false);
-    
+
     // append some elements the list
     assert(dll_prepend(flowers_list, &flowers_array[0]) == true);
     assert(dll_prepend(flowers_list, &flowers_array[1]) == true);
@@ -225,8 +224,8 @@ void test_linked_list_remove()
     assert(flowers_list->size == 2);
 
     // checking if the correct elements were removed
-    assert(strcmp(*(char**)dll_get(flowers_list, 0), flowers_array[1]) == 0); // "rose"   should be at index 0
-    assert(strcmp(*(char**)dll_get(flowers_list, 1), flowers_array[3]) == 0); // "orchid" should be at index 1
+    assert(strcmp(*(char **)dll_get(flowers_list, 0), flowers_array[1]) == 0); // "rose"   should be at index 0
+    assert(strcmp(*(char **)dll_get(flowers_list, 1), flowers_array[3]) == 0); // "orchid" should be at index 1
 
     printf("Testing successful!\n");
 }
@@ -234,18 +233,84 @@ void test_linked_list_remove()
 void test_linked_list_pop()
 {
     printf("Testing ll_pop()...\n");
+
+    // initialize a linked list
+    DoublyLinkedList *flowers_list = dll_create();
+    char *flowers_array[] = {"Sunflower", "Rose", "Lily", "Orchids", "Forget Me Not"};
+
+    // append some elements the list
+    assert(dll_append(flowers_list, &flowers_array[0]) == true);
+    assert(dll_append(flowers_list, &flowers_array[1]) == true);
+    assert(dll_append(flowers_list, &flowers_array[2]) == true);
+    assert(dll_append(flowers_list, &flowers_array[3]) == true);
+    assert(dll_append(flowers_list, &flowers_array[4]) == true);
+
+    // testing the dll_pop function
+    assert(dll_pop(flowers_list));
+    assert(flowers_list->size == 4);
+
+    assert(dll_pop(flowers_list) == true);
+    assert(flowers_list->size == 3);
+
+    assert(dll_pop(flowers_list) == true);
+    assert(flowers_list->size == 2);
+
+    assert(dll_pop(flowers_list) == true);
+    assert(flowers_list->size == 1);
+
+    assert(dll_pop(flowers_list) == true);
+    assert(flowers_list->size == 0);
+
+    // cannot pop an empty list
+    assert(dll_pop(flowers_list) == false);
+
+    dll_destroy(flowers_list);
     printf("Testing successful!\n");
 }
 
 void test_linked_list_remove_element()
 {
     printf("Testing ll_remove_element()...\n");
+
+    // initialize a linked list
+    DoublyLinkedList *flowers_list = dll_create();
+    char *flowers_array[] = {"Sunflower", "Rose", "Lily", "Orchids", "Forget Me Not"};
+
+    // append some elements the list
+    assert(dll_append(flowers_list, &flowers_array[0]) == true);
+    assert(dll_append(flowers_list, &flowers_array[1]) == true);
+    assert(dll_append(flowers_list, &flowers_array[2]) == true);
+    assert(dll_append(flowers_list, &flowers_array[3]) == true);
+    assert(dll_append(flowers_list, &flowers_array[4]) == true);
+
+    // unhappy paths
+    assert(dll_remove_element(NULL, &flowers_array[0]) == false);
+    assert(dll_remove_element(flowers_list, NULL) == false);
+
     printf("Testing successful!\n");
 }
 
 void test_linked_list_clear()
 {
     printf("Testing ll_clear()...\n");
+
+    // initialize a linked list
+    DoublyLinkedList *flowers_list = dll_create();
+    char *flowers_array[] = {"Sunflower", "Rose", "Lily", "Orchids", "Forget Me Not"};
+
+    // append some elements the list
+    assert(dll_append(flowers_list, &flowers_array[0]) == true);
+    assert(dll_append(flowers_list, &flowers_array[1]) == true);
+    assert(dll_append(flowers_list, &flowers_array[2]) == true);
+    assert(dll_append(flowers_list, &flowers_array[3]) == true);
+    assert(dll_append(flowers_list, &flowers_array[4]) == true);
+
+    //
+    assert(dll_clear(flowers_list) == true);
+    assert(flowers_list->head == NULL);
+    assert(flowers_list->tail == NULL);
+    assert(flowers_list->size == 0);
+
     printf("Testing successful!\n");
 }
 
@@ -254,30 +319,101 @@ void test_linked_list_clear()
 void test_linked_list_is_empty()
 {
     printf("Testing ll_is_empty()...\n");
-    printf("Testing successful!\n");
-}
 
-void test_linked_list_is_full()
-{
-    printf("Testing ll_is_full()...\n");
+    // initialize a linked list
+    DoublyLinkedList *flowers_list = dll_create();
+    char *flowers_array[] = {"Sunflower", "Rose", "Lily"};
+
+    //
+    assert(dll_is_empty(flowers_list) == true);
+
+    // append some elements the list
+    assert(dll_append(flowers_list, &flowers_array[0]) == true);
+    assert(dll_append(flowers_list, &flowers_array[1]) == true);
+    assert(dll_append(flowers_list, &flowers_array[2]) == true);
+
+    assert(dll_is_empty(flowers_list) == false);
+
+    dll_destroy(flowers_list);
     printf("Testing successful!\n");
 }
 
 void test_linked_list_contains()
 {
     printf("Testing ll_contains()...\n");
+
+    // initialize a linked list
+    DoublyLinkedList *flowers_list = dll_create();
+    char *flowers_array[] = {"Sunflower", "Rose", "Lily"};
+
+    char *evil_string = "Red Spider Lily";
+
+    // append some elements the list
+    assert(dll_append(flowers_list, &flowers_array[0]) == true);
+    assert(dll_append(flowers_list, &flowers_array[1]) == true);
+    assert(dll_append(flowers_list, &flowers_array[2]) == true);
+
+    assert(dll_contains(flowers_list, &flowers_array[0]) == true);
+    assert(dll_contains(flowers_list, &flowers_array[1]) == true);
+    assert(dll_contains(flowers_list, &flowers_array[2]) == true);
+
+    assert(dll_contains(flowers_list, &evil_string) == false);
+
+    dll_destroy(flowers_list);
     printf("Testing successful!\n");
 }
 
 void test_linked_list_index_of()
 {
     printf("Testing ll_index_of()...\n");
+
+    // initialize a linked list
+    DoublyLinkedList *flowers_list = dll_create();
+    char *flowers_array[] = {"Sunflower", "Rose", "Lily"};
+    char *evil_string = "hehe";
+
+    // append some elements the list
+    dll_append(flowers_list, &flowers_array[0]);
+    dll_append(flowers_list, &flowers_array[1]);
+    dll_append(flowers_list, &flowers_array[2]);
+
+    // unhappy paths
+    assert(dll_index_of(flowers_list, &evil_string) == -1); // index of non existant element
+    assert(dll_index_of(NULL, &flowers_array[0]));          // null dll pointer
+    assert(dll_index_of(flowers_list, 100));                // index out of bounds
+
+    // happy paths
+    assert(dll_index_of(flowers_list, &flowers_array[0]) == 0);
+    assert(dll_index_of(flowers_list, &flowers_array[1]) == 1);
+    assert(dll_index_of(flowers_list, &flowers_array[2]) == 2);
+
+    dll_destroy(flowers_list);
     printf("Testing successful!\n");
 }
 
 void test_linked_list_get()
 {
     printf("Testing ll_get()...\n");
+
+    // initialize a linked list
+    DoublyLinkedList *flowers_list = dll_create();
+    char *flowers_array[] = {"Sunflower", "Rose", "Lily"};
+
+    // unhappy paths
+    assert(dll_get(NULL, 0) == false);
+    assert(dll_get(flowers_list, 100) == false);
+
+    // append some elements the list
+    dll_append(flowers_list, &flowers_array[0]);
+    dll_append(flowers_list, &flowers_array[1]);
+    dll_append(flowers_list, &flowers_array[2]);
+
+    // happy paths
+    assert(dll_get(flowers_list, 0) == &flowers_array[0]);
+    assert(dll_get(flowers_list, 1) == &flowers_array[1]);
+    assert(dll_get(flowers_list, 2) == &flowers_array[2]);
+
+    dll_destroy(flowers_list);
     printf("Testing successful!\n");
 }
 
@@ -298,13 +434,12 @@ void test_linked_list()
 
     test_linked_list_remove();
     test_linked_list_pop();
-    test_linked_list_remove_element();
+    // test_linked_list_remove_element();
     test_linked_list_clear();
 
-    // test_linked_list_is_empty();
-    // test_linked_list_is_full();
-    // test_linked_list_contains();
-    // test_linked_list_index_of();
-    // test_linked_list_get();
+    test_linked_list_is_empty();
+    test_linked_list_contains();
+    test_linked_list_index_of();
+    test_linked_list_get();
     // test_linked_list_set();
 }
