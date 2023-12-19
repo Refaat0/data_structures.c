@@ -338,8 +338,6 @@ bool dll_remove_element(DoublyLinkedList *linked_list, void *element)
         return false;
     }
 
-    printf("%d\n", index);
-
     if (index == linked_list->size-1)
     {
         dll_pop(linked_list);
