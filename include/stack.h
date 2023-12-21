@@ -3,7 +3,7 @@
 
 typedef struct Stack
 {
-    ArrayList collection;
+    ArrayList *collection;
     int size;
 } Stack;
 
@@ -46,13 +46,6 @@ void *stack_peek(Stack *stack);
 bool stack_pop(Stack *stack);
 
 /**
- * this function checks if the stack specified in the function parameters is full
- * @param stack a pointer to a Stack structure
- * @return a boolean of true if the stack is full
- */
-bool stack_is_full(Stack *stack);
-
-/**
  * this function checks if the stack specified in the function parameters is empty
  * @param stack a pointer to a Stack structure
  * @return a boolean of true if the stack is empty
@@ -71,7 +64,7 @@ ArrayList *stack_to_list(Stack *stack);
  * @param stack a pointer to a Stack structure
  * @return a boolean of true if the element is found in the stack
  */
-bool stack_contains(Stack *stack);
+bool stack_contains(Stack *stack, void *element);
 
 /**
  * this function returns the 1-based index of where an element is in the stack,

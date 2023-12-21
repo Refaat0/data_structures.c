@@ -33,11 +33,6 @@ bool stack_pop(Stack *stack)
     return false;
 }
 
-bool stack_is_full(Stack *stack)
-{
-    return false;
-}
-
 bool stack_is_empty(Stack *stack)
 {
     return false;
@@ -49,7 +44,7 @@ ArrayList *stack_to_list(Stack *stack)
     return list;
 }
 
-bool stack_contains(Stack *stack)
+bool stack_contains(Stack *stack, void *element)
 {
     return false;
 }
