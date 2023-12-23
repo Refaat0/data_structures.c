@@ -73,4 +73,4 @@ bool stack_contains(Stack *stack, void *element);
  * @param element a void pointer to an element
  * @return ...
 */
-bool stack_search(Stack *stack, void *element);
+int stack_search(Stack *stack, void *element);

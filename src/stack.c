@@ -1,55 +1,141 @@
 #include "../include/array-list.h"
 #include "../include/stack.h"
 #include <stdbool.h>
+#include <stdlib.h>
+#include <stdio.h>
 
 //// ==== Stack "Life-Cycle" Functions ==== ////
 
 Stack *stack_create()
 {
-    Stack *stack;
+    Stack *stack = malloc(sizeof(Stack));
+    if (stack == NULL)
+    {
+        free(stack);
+        return NULL;
+    }
+
+    stack->collection = list_create();
+    if (stack->collection == NULL)
+    {
+        free(stack->collection);
+        free(stack);
+
+        return NULL;
+    }
+
+    stack->size = 0;
     return stack;
 }
 
 bool stack_destroy(Stack *stack)
 {
-    return false;
+    if (stack == NULL)
+    {
+        return false;
+    }
+
+    free(stack->collection);
+    free(stack);
+
+    return true;
 }
 
 //// ==== Stack "Life-Cycle" Functions ==== ////
 
 bool stack_push(Stack *stack, void *element)
 {
+    if (stack == NULL || element == NULL)
+    {
+        return false;
+    }
+
+    if (list_append(stack->collection, element) == true)
+    {
+        stack->size++;
+        return true;
+    }
+
     return false;
 }
 
 void *stack_peek(Stack *stack)
 {
-    void *nullptr;
-    return nullptr;
+    if (stack == NULL)
+    {
+        return false;
+    }
+
+    if (stack_is_empty(stack))
+    {
+        return NULL;
+    }
+
+    void *element = list_get(stack->collection, stack->size-1);
+
+    if (element == NULL)
+    {
+        return NULL;
+    }
+
+    return element;
 }
 
 bool stack_pop(Stack *stack)
 {
+    if (stack == NULL)
+    {
+        return false;
+    }
+
+    if (list_pop(stack->collection) == true)
+    {
+        stack->size--;
+        return true;
+    }
+
     return false;
 }
 
 bool stack_is_empty(Stack *stack)
 {
-    return false;
+    if (stack == NULL)
+    {
+        return false;
+    }
+    
+    return stack->size == 0;
 }
 
 ArrayList *stack_to_list(Stack *stack)
 {
-    ArrayList *list;
-    return list;
+    return stack->collection;
 }
 
 bool stack_contains(Stack *stack, void *element)
 {
-    return false;
+    if (stack == NULL || element == NULL)
+    {
+        return false;
+    }
+
+    return list_contains(stack->collection, element);
 }
 
-bool stack_search(Stack *stack, void *element)
+int stack_search(Stack *stack, void *element)
 {
-    return false;
+    if (stack == NULL || element == NULL)
+    {
+        return -1;
+    }
+
+    int index = list_index_of(stack->collection, element);
+
+    if (index == -1)
+    {
+        return -1;
+    }
+
+    return index + 1;
+
 }

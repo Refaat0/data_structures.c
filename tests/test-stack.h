@@ -39,8 +39,6 @@ void test_stack_destroy()
 
     // happy paths
     assert(stack_destroy(stack) == true);
-    assert(stack->collection == NULL);
-    assert(stack == NULL);
 
     printf("Testing successful!\n");
 }
@@ -88,17 +86,18 @@ void test_stack_peek()
     stack_push(stack, &orchid);
     stack_push(stack, &rose);
 
-    // unhappy path
-    assert(stack_peek(NULL) == NULL); // null stack pointer
+    // unhappy paths
+    assert(stack_peek(NULL) == NULL);
 
     // happy paths; testing if the peek function works
-    assert(strcmp(*(char **)stack_peek(stack), "Sunflower") == 0);
+    assert(strcmp(*(char **)stack_peek(stack), "Rose") == 0);
 
     stack_pop(stack);
     assert(strcmp(*(char **)stack_peek(stack), "Orchid") == 0);
 
     stack_pop(stack);
-    assert(strcmp(*(char **)stack_peek(stack), "Rose") == 0);
+    assert(strcmp(*(char **)stack_peek(stack), "Sunflower") == 0);
+    stack_pop(stack);
 
     // peeking an empty stack
     assert(stack_peek(stack) == NULL);
@@ -128,20 +127,20 @@ void test_stack_pop()
     // happy paths
     assert(stack_pop(stack) == true);
     assert(strcmp(*(char **)stack_peek(stack), "Orchid") == 0);
-    assert(stack->size = 2);
+    assert(stack->size == 2);
 
     assert(stack_pop(stack) == true);
-    assert(strcmp(*(char **)stack_peek(stack), "Rose") == 0);
-    assert(stack->size = 1);
+    assert(strcmp(*(char **)stack_peek(stack), "Sunflower") == 0);
+    assert(stack->size == 1);
 
     assert(stack_pop(stack) == true);
-    assert(stack->size = 0);
+    assert(stack->size == 0);
 
     // popping from an empty stack
     assert(stack_pop(stack) == false);
-    assert(stack->size = 0);
+    assert(stack->size == 0);
 
-    stack_destroy(stack);
+    // stack_destroy(stack);
     printf("Testing successful!\n");
 }
 
@@ -252,7 +251,7 @@ void test_stack_search()
 
     // unhappy paths
     assert(stack_search(NULL, &rose) == -1); // null stack pointer
-    assert(stack_search(stack, NULL) == -1);  // null element pointer
+    assert(stack_search(stack, NULL) == -1); // null element pointer
 
     // happy paths
     assert(stack_search(stack, &sunflower) == 1);
