@@ -22,6 +22,8 @@ Queue *queue_create();
  */
 bool queue_destroy(Queue *queue);
 
+//// ==== Queue Operational Functions ==== ////
+
 /**
  * this function inserts an element to the start of a Queue specified in the function parameters
  * @param queue a pointer to a Queue structure
