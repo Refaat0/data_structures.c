@@ -80,16 +80,10 @@ bool dll_destroy(DoublyLinkedList *linked_list)
 
 bool dll_insert(DoublyLinkedList *linked_list, void *element, int index)
 {
-    if (linked_list == NULL)
+    if (linked_list == NULL || element == NULL)
     {
         return false;
     }
-
-    if (element == NULL)
-    {
-        return false;
-    }
-
     if (index < 0 || index > linked_list->size)
     {
         return false;
@@ -104,6 +98,7 @@ bool dll_insert(DoublyLinkedList *linked_list, void *element, int index)
         dll_prepend(linked_list, element);
         return true;
     }
+
     // basically prepending an element
     if (index >= linked_list->size)
     {
@@ -141,13 +136,12 @@ bool dll_insert(DoublyLinkedList *linked_list, void *element, int index)
     return true;
 }
 
-bool dll_insert_ll(DoublyLinkedList *linked_list_alpha, DoublyLinkedList *linked_list_bravo, int index)
+bool dll_insert_dll(DoublyLinkedList *linked_list_alpha, DoublyLinkedList *linked_list_bravo, int index)
 {
     if (linked_list_alpha == NULL || linked_list_bravo == NULL)
     {
         return false;
     }
-
     if (index < 0 || index > linked_list_alpha->size)
     {
         return false;
@@ -163,12 +157,7 @@ bool dll_insert_ll(DoublyLinkedList *linked_list_alpha, DoublyLinkedList *linked
 
 bool dll_prepend(DoublyLinkedList *linked_list, void *element)
 {
-    if (linked_list == NULL)
-    {
-        return false;
-    }
-
-    if (element == NULL)
+    if (linked_list == NULL || element == NULL)
     {
         return false;
     }
@@ -197,12 +186,7 @@ bool dll_prepend(DoublyLinkedList *linked_list, void *element)
 
 bool dll_append(DoublyLinkedList *linked_list, void *element)
 {
-    if (linked_list == NULL)
-    {
-        return false;
-    }
-
-    if (element == NULL)
+    if (linked_list == NULL || element == NULL)
     {
         return false;
     }
@@ -237,7 +221,6 @@ bool dll_remove(DoublyLinkedList *linked_list, int index)
     {
         return false;
     }
-
     if (index < 0 || index > linked_list->size)
     {
         return false;
@@ -282,12 +265,7 @@ bool dll_remove(DoublyLinkedList *linked_list, int index)
 
 bool dll_pop(DoublyLinkedList *linked_list)
 {
-    if (linked_list == NULL)
-    {
-        return false;
-    }
-
-    if (dll_is_empty(linked_list))
+    if (linked_list == NULL || dll_is_empty(linked_list))
     {
         return false;
     }
@@ -321,12 +299,7 @@ bool dll_pop(DoublyLinkedList *linked_list)
 
 bool dll_remove_element(DoublyLinkedList *linked_list, void *element)
 {
-    if (linked_list == NULL)
-    {
-        return false;
-    }
-
-    if (element == NULL)
+    if (linked_list == NULL || element == NULL)
     {
         return false;
     }
@@ -338,7 +311,7 @@ bool dll_remove_element(DoublyLinkedList *linked_list, void *element)
         return false;
     }
 
-    if (index == linked_list->size-1)
+    if (index == linked_list->size - 1)
     {
         dll_pop(linked_list);
         return true;
@@ -385,14 +358,9 @@ bool dll_is_empty(DoublyLinkedList *linked_list)
 
 bool dll_contains(DoublyLinkedList *linked_list, void *element)
 {
-    if (linked_list == NULL)
+    if (linked_list == NULL || element == NULL)
     {
         return false;
-    }
-
-    if (element == NULL)
-    {
-        return NULL;
     }
 
     DLLNode *cursor = linked_list->head;
@@ -411,12 +379,7 @@ bool dll_contains(DoublyLinkedList *linked_list, void *element)
 
 int dll_index_of(DoublyLinkedList *linked_list, void *element)
 {
-    if (linked_list == NULL)
-    {
-        return -1;
-    }
-
-    if (element == NULL)
+    if (linked_list == NULL || element == NULL)
     {
         return -1;
     }
@@ -444,13 +407,12 @@ void *dll_get(DoublyLinkedList *linked_list, int index)
     {
         return NULL;
     }
-    
     if (index < 0 || index > linked_list->size)
     {
         return NULL;
     }
 
-    DLLNode *cursor = linked_list->head;  
+    DLLNode *cursor = linked_list->head;
     for (int i = 0; i < index; i++)
     {
         cursor = cursor->next;
@@ -466,16 +428,10 @@ void *dll_get(DoublyLinkedList *linked_list, int index)
 
 bool dll_set(DoublyLinkedList *linked_list, void *element, int index)
 {
-    if (linked_list == NULL)
+    if (linked_list == NULL || element == NULL)
     {
         return false;
     }
-
-    if (element == NULL)
-    {
-        return false;
-    }
-
     if (index < 0 || index > linked_list->size)
     {
         return NULL;

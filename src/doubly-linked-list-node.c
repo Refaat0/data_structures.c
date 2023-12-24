@@ -18,7 +18,7 @@ DLLNode *dll_node_create()
     return node;
 }
 
-bool ll_node_destroy(DLLNode *node)
+bool dll_node_destroy(DLLNode *node)
 {
     if (node == NULL)
     {
@@ -26,7 +26,5 @@ bool ll_node_destroy(DLLNode *node)
     }
 
     free(node);
-    node = NULL;
-
     return true;
 }

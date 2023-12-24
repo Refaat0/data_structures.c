@@ -11,7 +11,7 @@ typedef struct DLLNode
 
 /**
  * this function initializes a Node for a DoublyLnkedList
- * @return an initalized linked-list Node
+ * @return an initalized DoublyLnkedList Node
  */
 DLLNode *dll_node_create();
 

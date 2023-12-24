@@ -61,17 +61,12 @@ bool stack_push(Stack *stack, void *element)
 
 void *stack_peek(Stack *stack)
 {
-    if (stack == NULL)
-    {
-        return false;
-    }
-
-    if (stack_is_empty(stack))
+    if (stack == NULL || stack_is_empty(stack))
     {
         return NULL;
     }
 
-    void *element = list_get(stack->collection, stack->size-1);
+    void *element = list_get(stack->collection, stack->size - 1);
 
     if (element == NULL)
     {
@@ -103,7 +98,7 @@ bool stack_is_empty(Stack *stack)
     {
         return false;
     }
-    
+
     return stack->size == 0;
 }
 
@@ -150,5 +145,4 @@ int stack_search(Stack *stack, void *element)
     }
 
     return index + 1;
-
 }

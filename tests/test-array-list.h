@@ -483,8 +483,8 @@ void test_list_index_of()
     int evil_int = 0;
 
     // unhappy path
-    assert(list_index_of(NULL, &numbers[0]) == false);
-    assert(list_index_of(list, NULL) == false);
+    assert(list_index_of(NULL, &numbers[0]) == -1);
+    assert(list_index_of(list, NULL) == -1);
 
     // verify that the return value of index_of is -1 for an element that doesnt exist in the list
     assert(list_index_of(list, &evil_int) == -1);

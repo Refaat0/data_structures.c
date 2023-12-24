@@ -8,7 +8,7 @@
 
 void test_linked_list_create()
 {
-    printf("Testing ll_create()...\n");
+    printf("Testing dll_create()...\n");
 
     // initialize a linked list
     DoublyLinkedList *linked_list = dll_create();
@@ -25,7 +25,7 @@ void test_linked_list_create()
 
 void test_linked_list_destroy()
 {
-    printf("Testing ll_destroy()...\n");
+    printf("Testing dll_destroy()...\n");
 
     // initialize a linked list & an array of elements
     DoublyLinkedList *linked_list = dll_create();
@@ -46,7 +46,7 @@ void test_linked_list_destroy()
 
 void test_linked_list_insert()
 {
-    printf("Testing ll_insert()...\n");
+    printf("Testing dll_insert()...\n");
 
     // initialize a linked list & an array of elements
     DoublyLinkedList *linked_list = dll_create();
@@ -98,7 +98,7 @@ void test_linked_list_insert()
 
 void test_linked_list_insert_list()
 {
-    printf("Testing ll_insert_list()...\n");
+    printf("Testing dll_insert_list()...\n");
 
     // initialize link lists
     DoublyLinkedList *general_list = dll_create();
@@ -126,16 +126,16 @@ void test_linked_list_insert_list()
 
     // basically appending flowers_list to the empty general_list
     // general_list = {"Sunflower", "Rose", "Lily"}
-    assert(dll_insert_ll(general_list, flowers_list, 0) == true);
+    assert(dll_insert_dll(general_list, flowers_list, 0) == true);
     assert(general_list->size == 3);
 
     // basically appending animals_list at the end of the general_list
     // general_list = {"Sunflower", "Rose", "Lily", "Cat", "Dog", "Axolotl"}
-    assert(dll_insert_ll(general_list, animals_list, general_list->size) == true);
+    assert(dll_insert_dll(general_list, animals_list, general_list->size) == true);
     assert(general_list->size == 6);
 
     // basically appending planets_list in the middle of general_list
-    assert(dll_insert_ll(general_list, planets_list, general_list->size / 2) == true);
+    assert(dll_insert_dll(general_list, planets_list, general_list->size / 2) == true);
     assert(general_list->size == 9);
 
     // testing head/tail/next/prev pointers
@@ -158,7 +158,7 @@ void test_linked_list_insert_list()
 
 void test_linked_list_append()
 {
-    printf("Testing ll_append()...\n");
+    printf("Testing dll_append()...\n");
 
     // initialize a linked list
     DoublyLinkedList *flowers_list = dll_create();
@@ -193,7 +193,7 @@ void test_linked_list_append()
 
 void test_linked_list_prepend()
 {
-    printf("Testing ll_prepend()...\n");
+    printf("Testing dll_prepend()...\n");
 
     // initialize a linked list
     DoublyLinkedList *flowers_list = dll_create();
@@ -230,7 +230,7 @@ void test_linked_list_prepend()
 
 void test_linked_list_remove()
 {
-    printf("Testing ll_remove()...\n");
+    printf("Testing dll_remove()...\n");
 
     // initialize a linked list
     DoublyLinkedList *flowers_list = dll_create();
@@ -273,7 +273,7 @@ void test_linked_list_remove()
 
 void test_linked_list_pop()
 {
-    printf("Testing ll_pop()...\n");
+    printf("Testing dll_pop()...\n");
 
     // initialize a linked list
     DoublyLinkedList *flowers_list = dll_create();
@@ -322,7 +322,7 @@ void test_linked_list_pop()
 
 void test_linked_list_remove_element()
 {
-    printf("Testing ll_remove_element()...\n");
+    printf("Testing dll_remove_element()...\n");
 
     // initialize a linked list
     DoublyLinkedList *flowers_list = dll_create();
@@ -353,7 +353,7 @@ void test_linked_list_remove_element()
 
 void test_linked_list_clear()
 {
-    printf("Testing ll_clear()...\n");
+    printf("Testing dll_clear()...\n");
 
     // initialize a linked list
     DoublyLinkedList *flowers_list = dll_create();
@@ -380,7 +380,7 @@ void test_linked_list_clear()
 
 void test_linked_list_is_empty()
 {
-    printf("Testing ll_is_empty()...\n");
+    printf("Testing dll_is_empty()...\n");
 
     // initialize a linked list
     DoublyLinkedList *flowers_list = dll_create();
@@ -406,7 +406,7 @@ void test_linked_list_is_empty()
 
 void test_linked_list_contains()
 {
-    printf("Testing ll_contains()...\n");
+    printf("Testing dll_contains()...\n");
 
     // initialize a linked list
     DoublyLinkedList *flowers_list = dll_create();
@@ -434,7 +434,7 @@ void test_linked_list_contains()
 
 void test_linked_list_index_of()
 {
-    printf("Testing ll_index_of()...\n");
+    printf("Testing dll_index_of()...\n");
 
     // initialize a linked list
     DoublyLinkedList *flowers_list = dll_create();
@@ -461,7 +461,7 @@ void test_linked_list_index_of()
 
 void test_linked_list_get()
 {
-    printf("Testing ll_get()...\n");
+    printf("Testing dll_get()...\n");
 
     // initialize a linked list
     DoublyLinkedList *flowers_list = dll_create();
@@ -487,7 +487,7 @@ void test_linked_list_get()
 
 void test_linked_list_set()
 {
-    printf("Testing ll_set()...\n");
+    printf("Testing dll_set()...\n");
 
     // initialize a linked list
     DoublyLinkedList *flowers_list = dll_create();

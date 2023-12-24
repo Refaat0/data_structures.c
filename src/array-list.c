@@ -48,11 +48,12 @@ ArrayList *list_create()
         return NULL;
     }
 
-    array_list->collection = malloc(sizeof(void *) * INITIAL_CAPACITY);
+    array_list->collection = malloc(INITIAL_CAPACITY * sizeof(void *));
     if (array_list->collection == NULL)
     {
         free(array_list->collection);
         free(array_list);
+
         return NULL;
     }
 
@@ -68,6 +69,7 @@ bool list_destroy(ArrayList *array_list)
     {
         return false;
     }
+
     free(array_list->collection);
     free(array_list);
 
@@ -78,16 +80,10 @@ bool list_destroy(ArrayList *array_list)
 
 bool list_insert(ArrayList *array_list, void *element, int index)
 {
-    if (array_list == NULL)
+    if (array_list == NULL || element == NULL)
     {
         return false;
     }
-
-    if (element == NULL)
-    {
-        return false;
-    }
-
     if (index < 0 || index > array_list->size)
     {
         return false;
@@ -112,7 +108,6 @@ bool list_insert_list(ArrayList *array_list_alpha, ArrayList *array_list_bravo, 
     {
         return false;
     }
-
     if (index < 0 || index > array_list_alpha->size)
     {
         return false;
@@ -150,17 +145,11 @@ bool list_prepend(ArrayList *array_list, void *element)
 
 bool list_remove(ArrayList *array_list, int index)
 {
-    if (array_list == NULL)
+    if (array_list == NULL || list_is_empty(array_list)) 
     {
         return false;
     }
-
     if (index < 0 || index > array_list->size)
-    {
-        return false;
-    }
-
-    if (list_is_empty(array_list))
     {
         return false;
     }
@@ -177,12 +166,7 @@ bool list_remove(ArrayList *array_list, int index)
 
 bool list_pop(ArrayList *array_list)
 {
-    if (array_list == NULL)
-    {
-        return false;
-    }
-
-    if (list_is_empty(array_list))
+    if (array_list == NULL || list_is_empty(array_list))
     {
         return false;
     }
@@ -194,12 +178,7 @@ bool list_pop(ArrayList *array_list)
 
 bool list_remove_element(ArrayList *array_list, void *element)
 {
-    if (array_list == NULL)
-    {
-        return false;
-    }
-
-    if (element == NULL)
+    if (array_list == NULL || element == NULL)
     {
         return false;
     }
@@ -220,12 +199,7 @@ bool list_remove_element(ArrayList *array_list, void *element)
 
 bool list_clear(ArrayList *array_list)
 {
-    if (array_list == NULL)
-    {
-        return false;
-    }
-
-    if (list_is_empty(array_list))
+    if (array_list == NULL || list_is_empty(array_list))
     {
         return false;
     }
@@ -258,17 +232,10 @@ bool list_is_full(ArrayList *array_list)
     return array_list->size == array_list->capacity;
 }
 
-
 bool list_contains(ArrayList *array_list, void *element)
 {
-    if (array_list == NULL)
+    if (array_list == NULL || element == NULL)
     {
-        return false;
-    }
-
-    if (array_list == element)
-    {
-        fprintf(stderr, ">>ERROR: Element cannot be NULL\n");
         return false;
     }
 
@@ -285,17 +252,7 @@ bool list_contains(ArrayList *array_list, void *element)
 
 int list_index_of(ArrayList *array_list, void *element)
 {
-    if (array_list == NULL)
-    {
-        return false;
-    }
-
-    if (element == NULL)
-    {
-        return false;
-    }
-
-    if (list_is_empty(array_list))
+    if (array_list == NULL || element == NULL || list_is_empty(array_list))
     {
         return -1;
     }
@@ -317,7 +274,6 @@ void *list_get(ArrayList *array_list, int index)
     {
         return NULL;
     }
-
     if (index < 0 || index >= array_list->size)
     {
         return NULL;
@@ -328,23 +284,15 @@ void *list_get(ArrayList *array_list, int index)
 
 bool list_set(ArrayList *array_list, void *element, int index)
 {
-    if (array_list == NULL)
+    if (array_list == NULL || element == NULL)
     {
         return false;
     }
-
-    if (array_list == element)
-    {
-        fprintf(stderr, ">>ERROR: Element cannot be NULL\n");
-        return false;
-    }
-
     if (index < 0 || index >= array_list->size)
     {
         return false;
     }
 
     array_list->collection[index] = element;
-
     return true;
 }
