@@ -109,7 +109,7 @@ void test_queue_is_empty()
     char *evil_string = "Red Spider Lily";
 
     // unhappy paths
-    assert(queue_to_list(NULL) == false); // null queue pointer
+    assert(queue_is_empty(NULL) == false); // null queue pointer
 
     // happy paths
     assert(queue_is_empty(queue) == true);
@@ -140,7 +140,7 @@ void test_queue_clear()
 
     // happy paths
     assert(queue_clear(queue) == true);
-    assert(queue->size = 0);
+    assert(queue->size == 0);
 
     queue_destroy(queue);
     printf("Testing successful!\n");
@@ -150,8 +150,24 @@ void test_queue_to_list()
 {
     printf("Testing test_queue_to_list()...\n");
 
-    // initialize a Queue
+    // initialize a Queue & some elements
     Queue *queue = queue_create();
+    char *sunflower = "Sunflower";
+    char *orchid = "Orchid";
+    char *rose = "Rose";
+
+    // enqueue some elements
+    queue_enqueue(queue, &sunflower);
+    queue_enqueue(queue, &orchid);
+    queue_enqueue(queue, &rose);
+
+    // converting Queue to ArrayList
+    ArrayList *array_list = queue_to_list(queue);
+
+    // testing if the conversion worked
+    assert(array_list != NULL);
+    assert(array_list->size == 3);
+    assert(array_list->capacity == INITIAL_CAPACITY);
 
     queue_destroy(queue);
     printf("Testing successful!\n");

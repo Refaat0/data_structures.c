@@ -5,6 +5,6 @@
 
 int main(void)
 {
-    test_stack();
+    test_queue();
     return 0;
 }
