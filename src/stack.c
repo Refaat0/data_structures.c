@@ -107,6 +107,19 @@ bool stack_is_empty(Stack *stack)
     return stack->size == 0;
 }
 
+bool stack_clear(Stack *stack)
+{
+    if (stack == NULL)
+    {
+        return false;
+    }
+
+    list_clear(stack->collection);
+    stack->size = 0;
+
+    return true;
+}
+
 ArrayList *stack_to_list(Stack *stack)
 {
     return stack->collection;

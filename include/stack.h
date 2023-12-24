@@ -11,14 +11,14 @@ typedef struct Stack
 /**
  * this function returns an initialized stack
  * @return an initialized Stack
-*/
+ */
 Stack *stack_create();
 
 /**
  * this function destroys a Stack specified in the function parameters
  * @param stack a pointer to a Stack structure
  * @return a boolean of true if the operation is successful
-*/
+ */
 bool stack_destroy(Stack *stack);
 
 //// ==== Stack Operational Functions ==== ////
@@ -53,6 +53,13 @@ bool stack_pop(Stack *stack);
 bool stack_is_empty(Stack *stack);
 
 /**
+ * this function clears a Stack specified in the function parameters
+ * @param stack a pointer to a Stack structure
+ * @return a boolean of true if the operation is successful
+ */
+bool stack_clear(Stack *stack);
+
+/**
  * this function converts the Stack specified in the function parameters to an ArrayList
  * @param stack a pointer to a Stack structure
  * @return an Arraylist containing all the elements from the stack in order of appearance
@@ -72,5 +79,5 @@ bool stack_contains(Stack *stack, void *element);
  * @param stack a pointer to a Stack structure
  * @param element a void pointer to an element
  * @return ...
-*/
+ */
 int stack_search(Stack *stack, void *element);
