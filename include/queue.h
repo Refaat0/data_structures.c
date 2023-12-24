@@ -47,6 +47,13 @@ bool queue_dequeue(Queue *queue);
 bool queue_is_empty(Queue *queue);
 
 /**
+ * this functions clears the Queue specified in the function parameters
+ * @param queue a pointer to a Queue structure
+ * @return a boolean of true if the operation is successful
+ */
+bool queue_clear(Queue *queue);
+
+/**
  * this function converts a Queue specified in the function parameters to an ArrayList
  * @param queue a pointer to a Queue structure
  * @return an Arraylist containing all the elements from the Queue in order of appearance
