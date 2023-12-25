@@ -3,12 +3,11 @@
 #include "../tests/test-array-list.h"
 #include "../tests/test-stack.h"
 #include "../tests/test-queue.h"
+#include "../tests/test-comparator.h"
 
 int main(void)
 {
-    test_list();
-    test_linked_list();
-    test_stack();
-    test_queue();
+    test_comparator();
+    
     return 0;
 }
