@@ -4,10 +4,9 @@
 #include "../tests/test-stack.h"
 #include "../tests/test-queue.h"
 #include "../tests/test-comparator.h"
+#include "../include/comparator.h"
 
 int main(void)
 {
-    test_comparator();
-    
     return 0;
 }
