@@ -42,12 +42,10 @@ int main(void)
     bst_insert(bst, pG, compare_int);
     bst_insert(bst, pH, compare_int);
 
-    ArrayList *results = bst_in_order(bst);
+    ArrayList *results = bst_pre_order(bst);
 
-    for (int i = 0; i < results->size; i++)
-    {
-        printf("%d\n", *(int*)list_get(results, i));
-    }
+
+    bst_destroy(bst);
 
     return 0;
 }

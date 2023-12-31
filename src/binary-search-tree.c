@@ -23,7 +23,6 @@ BinarySearchTree *bst_create()
 
 bool bst_destroy(BinarySearchTree *bst)
 {
-    // >:(
     return false;
 }
 
@@ -204,7 +203,27 @@ ArrayList *bst_post_order(BinarySearchTree *bst)
 
 ArrayList *bst_pre_order(BinarySearchTree *bst)
 {
-    return NULL;
+    BinarySearchTreeNode *cursor = bst->root;
+    ArrayList *result = list_create();
+    Stack *nodes = stack_create();
+
+    while (cursor != NULL || !stack_is_empty(nodes))
+    {
+        if (cursor != NULL)
+        {
+            list_append(result, cursor->element);
+            stack_push(nodes, cursor->right);
+            cursor = cursor->left;
+        }
+        else
+        {
+            cursor = stack_peek(nodes);
+            stack_pop(nodes);
+        }
+    }
+
+    free(nodes);
+    return result;
 }
 
 ArrayList *bst_in_order(BinarySearchTree *bst)
