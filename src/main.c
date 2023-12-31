@@ -11,7 +11,43 @@
 #include "../include/stack.h"
 #include "../include/queue.h"
 
+#include "../include/binary-search-tree.h"
+
 int main(void)
 {
+
+    BinarySearchTree *bst = bst_create();
+
+    int a = 50;  void *pA = &a;    
+    int b = 100; void *pB = &b;
+    int c = 200; void *pC = &c;
+    int d = 300; void *pD = &d;
+
+    int e = 25; void *pE = &e;
+    int f = 5 ; void *pF = &f;
+    int g = 0 ; void *pG = &g;
+
+    int h = 30; void *pH = &h;
+    int i = 75; void *pI = &i;
+
+
+    bst_insert(bst, pA, compare_int);
+    bst_insert(bst, pB, compare_int);
+    bst_insert(bst, pC, compare_int);
+    bst_insert(bst, pD, compare_int);
+    bst_insert(bst, pI, compare_int);
+
+    bst_insert(bst, pE, compare_int);
+    bst_insert(bst, pF, compare_int);
+    bst_insert(bst, pG, compare_int);
+    bst_insert(bst, pH, compare_int);
+
+    ArrayList *results = bst_in_order(bst);
+
+    for (int i = 0; i < results->size; i++)
+    {
+        printf("%d\n", *(int*)list_get(results, i));
+    }
+
     return 0;
 }
