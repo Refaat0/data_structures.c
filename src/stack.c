@@ -18,7 +18,7 @@ Stack *stack_create()
     stack->collection = list_create();
     if (stack->collection == NULL)
     {
-        free(stack->collection);
+        list_destroy(stacj->collection);
         free(stack);
 
         return NULL;
@@ -35,7 +35,7 @@ bool stack_destroy(Stack *stack)
         return false;
     }
 
-    free(stack->collection);
+    list_destroy(stacj->collection);
     free(stack);
 
     return true;
